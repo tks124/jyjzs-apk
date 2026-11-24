@@ -1,0 +1,33 @@
+name: Publish PAK1 Data Package
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-pak1-data.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download encrypted data package
+        run: |
+          set -e
+          curl -sL --retry 3 --retry-delay 5 -o PrisonArchitect-PAK1-Data.zip "https://filebin.net/pa-pak1-0124/PrisonArchitect-PAK1-Data.zip"
+          ls -l PrisonArchitect-PAK1-Data.zip
+          md5sum PrisonArchitect-PAK1-Data.zip
+          SIZE=$(stat -c%s PrisonArchitect-PAK1-Data.zip)
+          echo "size=$SIZE"
+          test "$SIZE" -gt 300000000
+      - name: Create release with asset
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete pak1-data-v1 --yes --cleanup-tag || true
+          gh release create pak1-data-v1 \
+            --title "Prison Architect PAK1 加密数据包" \
+            --notes "加密数据包（PAK1 格式），密码 0124。文件头为 PAK1，不是 zip。" \
+            PrisonArchitect-PAK1-Data.zip
