@@ -1,18 +1,20 @@
 === delete old release ===
-delete_exit=0
+release not found
+delete_exit=1
 === create release ===
-https://github.com/tks124/jyjzs-apk/releases/tag/pak1-data-v1
+https://github.com/tks124/jyjzs-apk/releases/tag/pak1-v1
 create_exit=0
 === assets ===
-title:	Prison Architect PAK1 加密数据包
-tag:	pak1-data-v1
+title:	Prison Architect PAK1 加密方案
+tag:	pak1-v1
 draft:	false
 prerelease:	false
 immutable:	false
 author:	github-actions[bot]
-created:	2026-11-24T13:21:30Z
-published:	2026-11-24T13:22:15Z
-url:	https://github.com/tks124/jyjzs-apk/releases/tag/pak1-data-v1
+created:	2026-11-24T13:23:34Z
+published:	2026-11-24T13:24:20Z
+url:	https://github.com/tks124/jyjzs-apk/releases/tag/pak1-v1
 asset:	PrisonArchitect-PAK1-Data.zip
+asset:	PrisonArchitect-PAK1-Software.zip
 --
-PAK1 加密数据包，密码 0124。文件头为 PAK1，不是 zip。
+两个压缩包：软件包（构建 APK 的代码 + HTML 工具）与数据包（PAK1 加密，密码 0124）。
