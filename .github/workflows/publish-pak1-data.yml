@@ -17,9 +17,9 @@ jobs:
 
       - name: Download encrypted data package
         run: |
-          curl -sL --retry 3 --retry-delay 5 -o data.zip "https://filebin.net/pa-pak1-0124/PrisonArchitect-PAK1-Data.zip"
-          ls -l data.zip
-          md5sum data.zip
+          curl -sL --retry 3 --retry-delay 5 -o PrisonArchitect-PAK1-Data.zip "https://filebin.net/pa-pak1-0124/PrisonArchitect-PAK1-Data.zip"
+          ls -l PrisonArchitect-PAK1-Data.zip
+          md5sum PrisonArchitect-PAK1-Data.zip
 
       - name: Create release with asset
         env:
@@ -27,16 +27,17 @@ jobs:
         run: |
           set +e
           {
-            echo "=== whoami ==="
-            gh auth status 2>&1
             echo "=== delete old release ==="
             gh release delete pak1-data-v1 --repo tks124/jyjzs-apk --yes --cleanup-tag 2>&1
             echo "delete_exit=$?"
             echo "=== create release ==="
-            gh release create pak1-data-v1 --repo tks124/jyjzs-apk --title "Prison Architect PAK1 Data" --notes "PAK1 encrypted data package. Password: 0124" data.zip 2>&1
+            gh release create pak1-data-v1 --repo tks124/jyjzs-apk \
+              --title "Prison Architect PAK1 加密数据包" \
+              --notes "PAK1 加密数据包，密码 0124。文件头为 PAK1，不是 zip。" \
+              PrisonArchitect-PAK1-Data.zip 2>&1
             echo "create_exit=$?"
-            echo "=== list releases ==="
-            gh release list --repo tks124/jyjzs-apk 2>&1
+            echo "=== assets ==="
+            gh release view pak1-data-v1 --repo tks124/jyjzs-apk 2>&1
           } > ci-status.txt 2>&1
           cat ci-status.txt
 
