@@ -1,0 +1,16 @@
+=== whoami ===
+github.com
+  ✓ Logged in to github.com account github-actions[bot] (GH_TOKEN)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: ghs_*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+=== delete old release ===
+release not found
+delete_exit=1
+=== create release ===
+https://github.com/tks124/jyjzs-apk/releases/tag/pak1-data-v1
+create_exit=0
+=== list releases ===
+Prison Architect PAK1 Data	Latest	pak1-data-v1	2026-11-24T13:20:44Z
+jyjzs		v1.0.1	2026-09-25T06:24:39Z
+监狱建筑师		v1.0.0	2026-09-23T15:31:57Z
