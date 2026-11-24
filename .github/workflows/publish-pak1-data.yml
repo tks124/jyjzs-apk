@@ -1,4 +1,4 @@
-name: Publish PAK1 Data Package
+name: Publish PAK1 Packages
 
 on:
   push:
@@ -15,29 +15,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download encrypted data package
+      - name: Download both packages
         run: |
           curl -sL --retry 3 --retry-delay 5 -o PrisonArchitect-PAK1-Data.zip "https://filebin.net/pa-pak1-0124/PrisonArchitect-PAK1-Data.zip"
-          ls -l PrisonArchitect-PAK1-Data.zip
-          md5sum PrisonArchitect-PAK1-Data.zip
+          curl -sL --retry 3 --retry-delay 5 -o PrisonArchitect-PAK1-Software.zip "https://filebin.net/pa-pak1-0124/PrisonArchitect-PAK1-Software.zip"
+          ls -l *.zip
+          md5sum *.zip
 
-      - name: Create release with asset
+      - name: Create release with assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set +e
           {
             echo "=== delete old release ==="
-            gh release delete pak1-data-v1 --repo tks124/jyjzs-apk --yes --cleanup-tag 2>&1
+            gh release delete pak1-v1 --repo tks124/jyjzs-apk --yes --cleanup-tag 2>&1
             echo "delete_exit=$?"
             echo "=== create release ==="
-            gh release create pak1-data-v1 --repo tks124/jyjzs-apk \
-              --title "Prison Architect PAK1 加密数据包" \
-              --notes "PAK1 加密数据包，密码 0124。文件头为 PAK1，不是 zip。" \
-              PrisonArchitect-PAK1-Data.zip 2>&1
+            gh release create pak1-v1 --repo tks124/jyjzs-apk \
+              --title "Prison Architect PAK1 加密方案" \
+              --notes "两个压缩包：软件包（构建 APK 的代码 + HTML 工具）与数据包（PAK1 加密，密码 0124）。" \
+              PrisonArchitect-PAK1-Software.zip PrisonArchitect-PAK1-Data.zip 2>&1
             echo "create_exit=$?"
             echo "=== assets ==="
-            gh release view pak1-data-v1 --repo tks124/jyjzs-apk 2>&1
+            gh release view pak1-v1 --repo tks124/jyjzs-apk 2>&1
           } > ci-status.txt 2>&1
           cat ci-status.txt
 
