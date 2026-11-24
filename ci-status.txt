@@ -1,16 +1,18 @@
-=== whoami ===
-github.com
-  ✓ Logged in to github.com account github-actions[bot] (GH_TOKEN)
-  - Active account: true
-  - Git operations protocol: https
-  - Token: ghs_*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 === delete old release ===
-release not found
-delete_exit=1
+delete_exit=0
 === create release ===
 https://github.com/tks124/jyjzs-apk/releases/tag/pak1-data-v1
 create_exit=0
-=== list releases ===
-Prison Architect PAK1 Data	Latest	pak1-data-v1	2026-11-24T13:20:44Z
-jyjzs		v1.0.1	2026-09-25T06:24:39Z
-监狱建筑师		v1.0.0	2026-09-23T15:31:57Z
+=== assets ===
+title:	Prison Architect PAK1 加密数据包
+tag:	pak1-data-v1
+draft:	false
+prerelease:	false
+immutable:	false
+author:	github-actions[bot]
+created:	2026-11-24T13:21:30Z
+published:	2026-11-24T13:22:15Z
+url:	https://github.com/tks124/jyjzs-apk/releases/tag/pak1-data-v1
+asset:	PrisonArchitect-PAK1-Data.zip
+--
+PAK1 加密数据包，密码 0124。文件头为 PAK1，不是 zip。
